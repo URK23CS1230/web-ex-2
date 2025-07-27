@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Resume Submission - Campus Drive</title>
+  <style>
+    body { font-family: sans-serif; background: #f5f8fa; }
+    .container { max-width: 400px; margin: 30px auto; background: #fff; padding: 25px; border-radius: 8px; box-shadow: 0 2px 10px #0001; }
+    h2 { color: #2a3a6c; margin-bottom: 10px; text-align: center;}
+    .form-group { margin-bottom: 11px; }
+    label { font-weight: 500; display: block; margin-bottom: 3px; }
+    input, select, textarea { width: 100%; padding: 6px; font-size: 1em; margin-bottom: 4px; }
+    .form-actions { text-align: center; }
+    input[type=submit], input[type=reset] { margin: 0 12px; padding: 7px 14px; border: none; background: #283593; color: #fff; border-radius: 4px; cursor: pointer;}
+    input[type=submit]:hover, input[type=reset]:hover { background: #3f51b5; }
+    .summary label { color: #3d3d3d; display: inline-block; width: 130px; font-weight: bold;}
+    .summary { background: #f9f9fd; padding: 18px; border-radius: 7px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Resume Submission</h2>
+
+    <form id="resumeForm" autocomplete="on">
+      <div class="form-group">
+        <label for="name">Full Name</label>
+        <input id="name" name="name" type="text" required placeholder="Your name" autofocus maxlength="50">
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input id="email" name="email" type="email" required placeholder="xyz@email.com">
+      </div>
+      <div class="form-group">
+        <label for="phone">Mobile</label>
+        <input id="phone" name="phone" type="tel" required pattern="[6-9][0-9]{9}" maxlength="10" placeholder="9876543210">
+      </div>
+      <div class="form-group">
+        <label for="branch">Branch</label>
+        <select id="branch" name="branch" required>
+          <option value="">Select Branch</option>
+          <option>CSE</option>
+          <option>IT</option>
+          <option>ECE</option>
+          <option>EEE</option>
+          <option>MECH</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="resume">Resume (PDF)</label>
+        <input id="resume" name="resume" type="file" required accept=".pdf">
+      </div>
+      <div class="form-group">
+        <label for="about">About You</label>
+        <textarea id="about" name="about" rows="3" required placeholder="Short summary"></textarea>
+      </div>
+      <div class="form-actions">
+        <input type="submit" value="Submit">
+        <input type="reset" value="Reset">
+      </div>
+    </form>
+
+    <div class="summary" id="summary" style="display:none;">
+      <h3>Submission Received!</h3>
+      <div>
+        <label>Name:</label> <span id="s_name"></span><br>
+        <label>Email:</label> <span id="s_email"></span><br>
+        <label>Mobile:</label> <span id="s_phone"></span><br>
+        <label>Branch:</label> <span id="s_branch"></span><br>
+        <label>Resume File:</label> <span id="s_resume"></span><br>
+        <label>About:</label> <span id="s_about"></span>
+      </div>
+    </div>
+  </div>
+  <script>
+    document.getElementById('resumeForm').onsubmit = function(e) {
+      e.preventDefault();
+      document.getElementById('s_name').textContent = this.name.value;
+      document.getElementById('s_email').textContent = this.email.value;
+      document.getElementById('s_phone').textContent = this.phone.value;
+      document.getElementById('s_branch').textContent = this.branch.value;
+      document.getElementById('s_resume').textContent = this.resume.files[0] ? this.resume.files[0].name : "";
+      document.getElementById('s_about').textContent = this.about.value;
+      this.style.display = "none";
+      document.getElementById('summary').style.display = "";
+    };
+  </script>
+</body>
+</html>
